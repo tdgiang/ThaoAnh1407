@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Happy Birthday To You 🎁</title>
+
+    <link rel="icon" type="image/png" href="image/logo.png">
+    <link rel="apple-touch-icon" href="image/logo.png">
+    <meta name="description" content="Một món quà đầy yêu thương đang chờ bạn khám phá! Nhấn để xem lời chúc đặc biệt!">
+    <meta property="og:title" content="Happy Birthday To You🎁">
+    <meta property="og:description" content="Một món quà đầy yêu thương đang chờ bạn khám phá! Nhấn để xem lời chúc đặc biệt!">
+    <meta property="og:image" content="image/logo.png">
+    <meta property="og:type" content="website">
+
+    <link rel="stylesheet" href="index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+    /* ══ ENTER SCREEN CSS ══════════════════════════════════════ */
+    #enter-screen {
+        position:fixed;inset:0;z-index:99999998;
+        display:flex;align-items:center;justify-content:center;
+        background:radial-gradient(ellipse at 50% 55%,#1a0028 0%,#000 72%);
+        transition:opacity .9s ease,visibility .9s ease;overflow:hidden;
+    }
+    #enter-screen.es-hidden{opacity:0;visibility:hidden;pointer-events:none;}
+    #es-stars{position:absolute;inset:0;pointer-events:none;}
+    .es-star{position:absolute;border-radius:50%;background:#fff;animation:esTwinkle var(--dur,3s) var(--delay,0s) ease-in-out infinite alternate;}
+    @keyframes esTwinkle{from{opacity:.08;transform:scale(.7);}to{opacity:.95;transform:scale(1.3);}}
+    #es-particles{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
+    .es-particle{position:absolute;border-radius:50%;animation:esFloat var(--dur,8s) var(--delay,0s) ease-in-out infinite;opacity:0;}
+    @keyframes esFloat{0%{transform:translateY(0) scale(.8);opacity:0;}20%{opacity:.65;}80%{opacity:.25;}100%{transform:translateY(-130px) scale(1.3);opacity:0;}}
+    #es-content{position:relative;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;padding:0 20px;margin-top:-20px;animation:esAppear 1.1s ease forwards;}
+    @keyframes esAppear{from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:translateY(0);}}
+    #es-icon{font-size:clamp(2.8rem,9vw,4.2rem);line-height:1;animation:esBounce 2.2s ease-in-out infinite;filter:drop-shadow(0 0 18px rgba(255,100,180,.85));}
+    @keyframes esBounce{0%,100%{transform:translateY(0) scale(1);}50%{transform:translateY(-10px) scale(1.06);}}
+    #es-title{font-family:'Pacifico','Dancing Script',cursive;font-size:clamp(2.2rem,7.5vw,3.8rem);color:#fff;letter-spacing:.03em;line-height:1.15;text-shadow:0 0 28px rgba(255,105,180,1),0 0 60px rgba(255,20,147,.55),0 2px 8px rgba(0,0,0,.4);}
+    #es-sub{font-family:'Dancing Script',cursive;font-size:clamp(1.5rem,5.5vw,2.6rem);color:#ffb3de;letter-spacing:.07em;margin-top:2px;text-shadow:0 0 22px rgba(255,20,147,.75);}
+    #es-btn{position:relative;display:flex;align-items:center;gap:10px;margin-top:22px;padding:15px 38px;background:rgba(255,20,147,.1);border:1.5px solid rgba(255,105,180,.55);border-radius:50px;color:#fff;font-size:clamp(1rem,2.8vw,1.15rem);font-family:'Dancing Script',cursive;font-weight:600;letter-spacing:.07em;cursor:pointer;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:transform .2s ease,background .3s ease,border-color .3s ease;overflow:hidden;-webkit-tap-highlight-color:transparent;}
+    #es-btn:hover{background:rgba(255,20,147,.22);border-color:rgba(255,105,180,.9);transform:scale(1.05);}
+    #es-btn:active{transform:scale(.97);}
+    #es-btn-ring{position:absolute;inset:-3px;border-radius:50px;border:1.5px solid transparent;background:linear-gradient(#000 0 0) padding-box,conic-gradient(from 0deg,transparent 55%,rgba(255,105,180,.9) 100%) border-box;animation:esRingSpin 2.8s linear infinite;}
+    @keyframes esRingSpin{to{transform:rotate(360deg);}}
+    #es-btn-icon{font-size:1.15em;color:#ff69b4;position:relative;animation:esPulse 1.7s ease-in-out infinite;}
+    @keyframes esPulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(.82);}}
+    #es-btn-text{position:relative;}
+    #es-hint{font-size:clamp(.68rem,1.8vw,.8rem);color:rgba(255,175,215,.4);letter-spacing:.13em;margin-top:6px;}
+    .es-ripple{position:absolute;border-radius:50%;background:rgba(255,105,180,.3);transform:scale(0);animation:esRipple .65s ease-out forwards;pointer-events:none;}
+    @keyframes esRipple{to{transform:scale(4.5);opacity:0;}}
+    @media screen and (max-height:500px) and (orientation:landscape) {
+        #es-content{gap:6px;padding:0 16px;}
+        #es-icon{font-size:clamp(1.6rem,6vh,2.5rem);}
+        #es-title{font-size:clamp(1.6rem,7vh,2.8rem);}
+        #es-sub{font-size:clamp(1.1rem,5vh,1.8rem);margin-top:0;}
+        #es-btn{margin-top:8px;padding:10px 28px;}
+        #es-hint{margin-top:2px;}
+    }
+    </style>
+</head>
+
+<body>
+
+    <!-- ══ ENTER SCREEN ══════════════════════════════════════════ -->
+    <div id="enter-screen">
+        <div id="es-stars"></div>
+        <div id="es-particles"></div>
+        <div id="es-content">
+            <div id="es-icon">🎁</div>
+            <div id="es-title">Happy Birthday</div>
+            <div id="es-sub"> </div>
+            <button id="es-btn">
+                <span id="es-btn-ring"></span>
+                <span id="es-btn-icon">✦</span>
+                <span id="es-btn-text">Chạm để bắt đầu</span>
+            </button>
+            <div id="es-hint">Touch to begin · A gift for you ✨</div>
+        </div>
+    </div>
+
+    <!-- ══ BLOCK AUTO-START — enter screen kiểm soát ═════════════ -->
+    <script>
+    (function () {
+        window.__ES_BLOCK = true;
+        window.__ES_READY = false;
+        window.createLoadingUI = function () { return { style:{} }; };
+        window.removeLoadingUI = function () {};
+    })();
+    </script>
+
+    <button id="langSwitchBtn" style="display:none;top:20px;right:150px;z-index:10000004;padding:8px 16px;border-radius:8px;background:#fff;color:#222;border:1px solid #dadce0;cursor:pointer;">EN/VI</button>
+
+    <canvas id="matrix-rain" style="display:none;"></canvas>
+    <canvas style="position:absolute;width:100%;height:100%;z-index:9999;display:none;" class="canvas"></canvas>
+    <div class="overlay">
+        <div class="stars-container" id="starsContainer"></div>
+        <img id="gift-image" src="image/happy3.gif" style="display:none;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:10000;max-width:min(80%,55vh);max-height:min(80%,55vh);object-fit:contain;"/>
+        <div class="content-display" id="contentDisplay"><p id="contentText"></p></div>
+        <div class="wish-stage" id="wishStage"></div>
+        <div class="firework-container" id="fireworkContainer"></div>
+        <div class="book-container"><div class="book" id="book"></div></div>
+        <button class="music-control" id="musicControl" title="Play/Pause Music">▶</button>
+        <button class="settings-button" id="settingsButton" title="Settings" style="display:none;">⚙</button>
+        <div id="settingsHint" class="settings-hint">
+            <div class="hint-text" data-i18n="settingsHint" style="display:none;">ấn vào đây để setting theo ý muốn</div>
+        </div>
+
+        <!-- Modal cài đặt (ẩn — chỉ để settings.js không lỗi thiếu phần tử) -->
+        <div id="settingsModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 data-i18n="settings">⚙️ Cài Đặt Trang Web</h2>
+                    <span class="close">×</span>
+                </div>
+                <div class="modal-body">
+                    <div class="settings-section">
+                        <h3 data-i18n="music">🎵 Cài Đặt Âm Thanh</h3>
+                        <div class="form-group">
+                            <label for="backgroundMusic" data-i18n="backgroundMusic">Nhạc Nền:</label>
+                            <div class="music-select-row">
+                                <select id="backgroundMusic"><option value="" disabled selected>Đang tải danh sách nhạc...</option></select>
+                                <button type="button" id="musicPreviewButton" class="music-preview-btn">▶ Nghe thử</button>
+                            </div>
+                            <span id="musicPreviewStatus" class="music-preview-status">Chọn bài nhạc rồi nhấn "Nghe thử"</span>
+                        </div>
+                    </div>
+                    <div class="settings-section">
+                        <h3 data-i18n="countdown">⏰ Cài Đặt Thời Gian</h3>
+                        <div class="form-group">
+                            <label for="countdownTime" data-i18n="countdownTime">Thời Gian Đếm Ngược:</label>
+                            <select id="countdownTime">
+                                <option value="3" data-i18n="sec3">3 giây</option>
+                                <option value="5" data-i18n="sec5">5 giây</option>
+                                <option value="10" data-i18n="sec10">10 giây</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="settings-section">
+                        <h3 data-i18n="matrix">🌧️ Cài Đặt Hiệu Ứng Mưa Chữ</h3>
+                        <div class="form-group">
+                            <label for="matrixText" data-i18n="matrixText">chữ chính mưa chữ:</label>
+                            <input type="text" id="matrixText" placeholder="Nhập chữ cho hiệu ứng mưa chữ" data-i18n-placeholder="matrixText">
+                        </div>
+                        <div class="form-group">
+                            <label for="matrixColor1" data-i18n="matrixColor1">Màu mưa chữ 1:</label>
+                            <input type="color" id="matrixColor1" value="#ff69b4">
+                        </div>
+                        <div class="form-group">
+                            <label for="matrixColor2" data-i18n="matrixColor2">Màu mưa chữ 2:</label>
+                            <input type="color" id="matrixColor2" value="#ff1493">
+                        </div>
+                    </div>
+                    <div class="settings-section" id="sequenceSection">
+                        <h3 data-i18n="sequence">Cài Đặt chữ chính</h3>
+                        <div class="form-group">
+                            <label for="sequenceText" data-i18n="sequenceText">Nội Dung chữ chính:</label>
+                            <input type="text" id="sequenceText" placeholder="Ví dụ: CHÚC|MỪNG|SINH|NHẬT|..." data-i18n-placeholder="sequenceText">
+                            <small data-i18n="noteSequence" style="color:#888;display:block;margin-top:4px;">lưu ý: hãy ngăn cách bằng dấu |</small>
+                        </div>
+                        <div class="form-group" id="sequenceColorSection">
+                            <label for="sequenceColor" data-i18n="sequenceColor">Màu chữ chính:</label>
+                            <div style="display:flex;align-items:center;gap:8px;">
+                                <input type="color" id="sequenceColor" value="#ff69b4">
+                                <span id="sequenceColorPreview" style="display:inline-block;width:28px;height:28px;border-radius:50%;border:1px solid #ccc;background:#ff69b4;"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="settings-section">
+                        <h3 data-i18n="gift">Cài Đặt Hình Động</h3>
+                        <div class="form-group">
+                            <label for="giftImage" data-i18n="giftImage">Hình Động (tùy chọn):</label>
+                            <select id="giftImage"><option value="" data-i18n="noGif">Không có</option></select>
+                        </div>
+                    </div>
+                    <div class="settings-section">
+                        <h3 data-i18n="colorTheme">Chọn màu:</h3>
+                        <div id="colorThemeOptions" style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;"></div>
+                    </div>
+                    <div class="settings-section">
+                        <div class="form-group">
+                            <label for="enableBook" data-i18n="enableBook">Hiển thị sách:</label>
+                            <select id="enableBook">
+                                <option value="true" data-i18n="on">Bật</option>
+                                <option value="false" data-i18n="off">Tắt</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="settings-section" id="bookSettingsSection">
+                        <h3 data-i18n="book">📖 Cài Đặt Trang Sách</h3>
+                        <div id="pageConfigs"></div>
+                        <div class="form-group">
+                            <label for="enableHeart" data-i18n="enableHeart">Hiển thị hiệu ứng trái tim:</label>
+                            <select id="enableHeart">
+                                <option value="true" data-i18n="on">Bật</option>
+                                <option value="false" data-i18n="off">Tắt</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="isSave" data-i18n="isSave">Lưu QR vĩnh viễn:</label>
+                        <input type="checkbox" id="isSave" style="margin-left:10px;">
+                    </div>
+                    <button id="applySettings" class="apply-settings-btn" data-i18n="apply">🎉 Áp Dụng Cài Đặt</button>
+                </div>
+            </div>
+        </div>
+
+        <audio id="birthdayAudio" src="music/birthday-song.mp3" loop preload="auto"></audio>
+
+        <div id="orientation-lock">
+            <div class="phone-icon">
+                <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" width="80" height="80">
+                    <rect x="28" y="8" width="24" height="40" rx="3" stroke="rgba(255,105,180,0.9)" stroke-width="1.5"/>
+                    <line x1="28" y1="14" x2="52" y2="14" stroke="rgba(255,105,180,0.6)" stroke-width="1"/>
+                    <line x1="28" y1="42" x2="52" y2="42" stroke="rgba(255,105,180,0.6)" stroke-width="1"/>
+                    <circle cx="40" cy="44.5" r="1.5" fill="rgba(255,105,180,0.8)"/>
+                    <path d="M18 38 Q10 28 18 18" stroke="rgba(255,182,223,0.8)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                    <path d="M15 16 L18 18 L21 15" stroke="rgba(255,182,223,0.8)" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M62 18 Q70 28 62 38" stroke="rgba(255,182,223,0.8)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                    <path d="M65 40 L62 38 L59 41" stroke="rgba(255,182,223,0.8)" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div style="color:#ffb3de;font-family:'Dancing Script',cursive;font-size:1.3rem;margin-top:16px;text-shadow:0 0 12px rgba(255,105,180,0.5);">Xoay ngang màn hình</div>
+            <div style="color:rgba(255,175,215,0.4);font-size:0.75rem;letter-spacing:0.12em;margin-top:8px;">Rotate to landscape</div>
+        </div>
+
+        <!-- ══════════════════════════════════════════════════════════════
+             ⚙️  CẤU HÌNH NỘI DUNG — SỬA Ở ĐÂY
+             ══════════════════════════════════════════════════════════════ -->
+        <script>
+        window.BIRTHDAY_CONFIG = {
+            // Tên người nhận (hiện ở màn mở đầu & phần chúc mừng lớn)
+            name: "Thảo Anh",
+
+            // Tên chèn vào chuỗi "chữ chính" bay (thường để trùng tên trên)
+            sequenceName: "Thảo Anh",
+
+            // Tối đa 3 lời chúc (hiện lần lượt ở thẻ lời chúc, có nút chuyển)
+            wishes: [
+                "Chúc bạn tuổi mới thật nhiều sức khỏe, luôn xinh đẹp và rạng rỡ 💖",
+                "Mong mọi ước mơ của bạn đều thành hiện thực trong năm nay 🌟",
+                "Sinh nhật vui vẻ nhé! Cảm ơn vì đã luôn là chính bạn 🎂"
+            ],
+
+            // Ảnh của bạn: ĐỂ TRONG THƯ MỤC photos/ (bắt buộc để hiện ở màn ảnh
+            // xếp trái tim & bóng bay). Hoặc dùng link Cloudinary. Tránh dùng thư
+            // mục khác cho ảnh người nhận.
+            images: [
+                "photos/TA01.png",
+                "photos/TA02.jpg",
+                "photos/TA03.png",
+                "photos/TA04.png",
+                "photos/TA05.png",
+                "photos/TA06.png",
+                "photos/TA07.jpg",
+                "photos/TA08.jpg",
+                "photos/TA09.jpg",
+                "photos/TA10.jpg"
+            ],
+
+            // Nhạc nền (.mp3). Để "" nếu không dùng nhạc.
+            song: "music/birthday-song.mp3"
+        };
+        </script>
+
+        <!-- ══ NẠP DỮ LIỆU CỤC BỘ + TẢI SCRIPT (thay cho Firebase) ══ -->
+        <script>
+        (function () {
+            var C = window.BIRTHDAY_CONFIG || {};
+
+            // Các biến global mà settings.js / birthday-greeting.js đọc:
+            if (C.name)         window.FIREBASE_ENTER_NAME    = C.name;
+            if (C.sequenceName) window.FIREBASE_SEQUENCE_NAME = C.sequenceName;
+            else if (C.name)    window.FIREBASE_SEQUENCE_NAME = C.name;
+            if (C.wishes && C.wishes.length) window.FIREBASE_WISHES = C.wishes.slice(0, 3);
+            if (C.images && C.images.length) window.FIREBASE_IMAGES = C.images.slice();
+            if (C.song)         window.FIREBASE_SONG = C.song;
+
+            // Shim biến đổi URL ảnh: chuyển đường dẫn tương đối -> tuyệt đối.
+            // QUAN TRỌNG: hiệu ứng ảnh xếp trái tim & bóng bay chỉ nhận ảnh có URL
+            // chứa "/photos/" hoặc "cloudinary.com/". Vì vậy hãy để ảnh trong thư
+            // mục photos/ và shim này sẽ tạo URL tuyệt đối dạng .../photos/... hợp lệ.
+            window.cloudinaryDeliver = function (u) {
+                if (!u) return u;
+                if (/^https?:|^data:/.test(u)) return u;               // URL ngoài: giữ nguyên
+                return location.origin + '/' + String(u).replace(/^\.?\//, '');
+            };
+
+            // Hiện tên lên màn mở đầu
+            if (C.name) {
+                var esSub = document.getElementById('es-sub');
+                if (esSub) esSub.textContent = C.name;
+            }
+
+            function loadScript(src, cb) {
+                var s = document.createElement('script');
+                s.src = src; s.onload = cb; s.onerror = cb;
+                document.head.appendChild(s);
+            }
+
+            // Nạp script theo đúng thứ tự của bản gốc
+            loadScript('lang.js', function () {
+              loadScript('settings.js', function () {
+                loadScript('stubs.js', function () {
+                  loadScript('clock-reveal.js', function () {
+                  loadScript('birthday-greeting.js', function () {
+                  loadScript('ui.js', function () {
+                    try {
+                      if (typeof initializeDefaultSettings === 'function') initializeDefaultSettings();
+                      if (typeof createPages === 'function') createPages();
+                      var audio = document.getElementById('birthdayAudio');
+                      if (audio && window.settings && window.settings.music) {
+                        audio.src = window.settings.music;
+                        audio.load();
+                      }
+                      if (window.settings && typeof matrixChars !== 'undefined') {
+                        matrixChars = window.settings.matrixText.split('');
+                      }
+                      window.isWebsiteReady = true;
+                      window.__ES_READY = true;
+                    } catch (e) {
+                      console.error('[Local Bootstrap] Init error:', e);
+                    }
+                  });
+                  });
+                  });
+                });
+              });
+            });
+        })();
+        </script>
+
+        <!-- ══ ENTER SCREEN LOGIC ════════════════════════════════ -->
+        <script>
+        (function () {
+            var esScreen = document.getElementById('enter-screen');
+            var esBtn    = document.getElementById('es-btn');
+            var esStars  = document.getElementById('es-stars');
+            var esParts  = document.getElementById('es-particles');
+            var orientLock = document.getElementById('orientation-lock');
+
+            /* ── Tạo sao ── */
+            for (var i = 0; i < 130; i++) {
+                var s = document.createElement('div');
+                s.className = 'es-star';
+                var sz = Math.random() * 2.2 + 0.4;
+                s.style.cssText = 'width:'+sz+'px;height:'+sz+'px;'
+                    +'left:'+(Math.random()*100)+'%;top:'+(Math.random()*100)+'%;'
+                    +'--dur:'+(2+Math.random()*4)+'s;--delay:'+(Math.random()*5)+'s;';
+                esStars.appendChild(s);
+            }
+
+            /* ── Tạo hạt hồng bay lên ── */
+            var cols = ['#ff69b4','#ff1493','#ffb3de','#c084fc','#fb7185'];
+            for (var j = 0; j < 20; j++) {
+                var p = document.createElement('div');
+                p.className = 'es-particle';
+                var psz = Math.random()*5+3;
+                p.style.cssText = 'width:'+psz+'px;height:'+psz+'px;'
+                    +'left:'+(Math.random()*100)+'%;bottom:'+(Math.random()*35)+'%;'
+                    +'background:'+cols[Math.floor(Math.random()*cols.length)]+';'
+                    +'filter:blur('+(Math.random()*1.5)+'px);'
+                    +'--dur:'+(5+Math.random()*6)+'s;--delay:-'+(Math.random()*5)+'s;';
+                esParts.appendChild(p);
+            }
+
+            /* ══ ORIENTATION GATE ══ */
+            var isMob = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            function orientGate() {
+                var isLand = window.innerWidth > window.innerHeight;
+                if (isMob && !isLand) {
+                    orientLock.style.display = 'flex';
+                    esScreen.style.visibility = 'hidden';
+                    esScreen.style.opacity = '0';
+                } else {
+                    orientLock.style.display = 'none';
+                    if (!esScreen.classList.contains('es-hidden')) {
+                        esScreen.style.visibility = 'visible';
+                        esScreen.style.opacity = '1';
+                    }
+                }
+            }
+            orientGate();
+            if (isMob) window.addEventListener('resize', orientGate);
+
+            /* ── Ripple ── */
+            esBtn.addEventListener('click', function(e) {
+                var r = document.createElement('span');
+                r.className = 'es-ripple';
+                var rect = esBtn.getBoundingClientRect();
+                var size = Math.max(rect.width, rect.height);
+                r.style.cssText = 'width:'+size+'px;height:'+size+'px;'
+                    +'left:'+(e.clientX-rect.left-size/2)+'px;'
+                    +'top:'+(e.clientY-rect.top-size/2)+'px;';
+                esBtn.appendChild(r);
+                r.addEventListener('animationend',function(){r.remove();});
+            });
+
+            /* ══ CLICK NÚT BẮT ĐẦU ══ */
+            esBtn.addEventListener('click', function onStart() {
+                esBtn.removeEventListener('click', onStart);
+                esBtn.disabled = true;
+
+                (function requestFullScreen() {
+                    var elem = document.documentElement;
+                    if (elem.requestFullscreen) { elem.requestFullscreen().catch(function(){}); }
+                    else if (elem.webkitRequestFullscreen) { elem.webkitRequestFullscreen(); }
+                })();
+
+                function resizeAllCanvases() {
+                    if (typeof forceResizeMatrix === 'function') forceResizeMatrix();
+                    if (typeof S !== 'undefined' && S.Drawing && S.Drawing.adjustCanvas) S.Drawing.adjustCanvas();
+                }
+                function onFullscreenChange() {
+                    setTimeout(resizeAllCanvases, 100);
+                    setTimeout(resizeAllCanvases, 350);
+                    setTimeout(resizeAllCanvases, 700);
+                }
+                document.addEventListener('fullscreenchange', onFullscreenChange);
+                document.addEventListener('webkitfullscreenchange', onFullscreenChange);
+
+                window.removeEventListener('resize', orientGate);
+                esScreen.classList.add('es-hidden');
+
+                var musicBtn = document.getElementById('matrixMusicBtn');
+                if (musicBtn) musicBtn.style.display = '';
+
+                function doStart() {
+                    window.__ES_BLOCK = false;
+                    if (typeof checkOrientation === 'function') { checkOrientation(); }
+                    else if (typeof startWebsite === 'function') { startWebsite(); }
+                    var audio = document.getElementById('birthdayAudio');
+                    if (audio) {
+                        audio.play().then(function(){
+                            var mb = document.getElementById('matrixMusicBtn');
+                            if (mb) mb.classList.add('playing');
+                            if (typeof isPlaying !== 'undefined') isPlaying = true;
+                        }).catch(function(){});
+                    }
+                }
+
+                if (window.__ES_READY) { doStart(); }
+                else {
+                    var _poll = setInterval(function() {
+                        if (window.__ES_READY) { clearInterval(_poll); doStart(); }
+                    }, 100);
+                    setTimeout(function() { clearInterval(_poll); }, 10000);
+                }
+            });
+
+            esScreen.addEventListener('transitionend', function() {
+                if (esScreen.classList.contains('es-hidden')) esScreen.style.display='none';
+            });
+        })();
+        </script>
+
+    </div>
+</body>
+
+</html>
